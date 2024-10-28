@@ -6,5 +6,13 @@ La aplicación se enfoca en la implementación de un flujo completo de autentica
 Tablero [Trello](https://trello.com/b/Wk9DXmfR/loginuserapp)
 Despliegue [LoginUserApp](https://loginuserapp.netlify.app)
 
-<img src="./public/sofi.jpeg" alt="Texto alternativo" width="400" height="300">
-<img src="./public/sandra.jpeg" alt="Texto alternativo" width="400" height="300">
+<div style="display: flex; justify-content: space-around;">
+  <div style="text-align: center;">
+    <img src="./public/sofi.jpeg" alt="Sofi" width="200" height="200">
+    <p>Sofi</p>
+  </div>
+  <div style="text-align: center;">
+    <img src="./public/sandra.jpeg" alt="Sandra" width="200" height="200">
+    <p>Sandra</p>
+  </div>
+</div>
