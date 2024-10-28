@@ -7,8 +7,10 @@ Tablero [Trello](https://trello.com/b/Wk9DXmfR/loginuserapp)
 Despliegue [LoginUserApp](https://loginuserapp.netlify.app)
 
 <p align="center">
-  <img src="./public/sofi.jpeg" alt="Sofi" width="200" height="200">
-  <img src="./public/sandra.jpeg" alt="Sandra" width="200" height="200">
+  <img src="./public/sofi.jpeg" alt="Sofi" width="200" height="200"><br>
+  Sofi
 </p>
-
-<p align="center">Sofi &nbsp;&nbsp;&nbsp; Sandra</p>
+<p align="center">
+  <img src="./public/sandra.jpeg" alt="Sandra" width="200" height="200"><br>
+  Sandra
+</p>
