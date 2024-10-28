@@ -9,10 +9,10 @@ Despliegue [LoginUserApp](https://loginuserapp.netlify.app)
 <div style="display: flex; justify-content: space-around; align-items: center;">
   <div style="text-align: center; margin: 10px;">
     <img src="./public/sofi.jpeg" alt="Sofi" width="200" height="200">
-    <p>Sofi</p>
+    <p align="center">Sofi</p>
   </div>
   <div style="text-align: center; margin: 10px;">
     <img src="./public/sandra.jpeg" alt="Sandra" width="200" height="200">
-    <p>Sandra</p>
+    <p align="center">Sandra</p>
   </div>
 </div>
