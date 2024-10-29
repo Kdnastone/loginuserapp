@@ -14,7 +14,6 @@ import {
   recoveryFailure,
 } from "../redux/recoverySlice";
 
-
 function Recovery() {
   // Hook para acceder a la función dispatch de Redux
   const dispatch = useDispatch();
@@ -39,7 +38,7 @@ function Recovery() {
 
     // Verificación de que el campo de correo no esté vacío
     if (!email) {
-      setError("Por favor, ingrese su correo electrónico.");
+      alert("Por favor, ingrese su correo electrónico.");
       return;
     }
 
@@ -50,9 +49,6 @@ function Recovery() {
     dispatch(recoveryRequest());
 
     try {
-      // Aquí simularías la lógica para enviar un correo de recuperación
-      // Por ejemplo, podrías hacer una llamada a una API para enviar el correo
-
       // Simulamos una respuesta exitosa
       dispatch(recoverySuccess({ email }));
       // Redirigir a una página de confirmación
@@ -75,12 +71,16 @@ function Recovery() {
         placeholder="Correo electrónico"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        required
       />
 
       {/* Botón para enviar el formulario */}
       <button type="submit" disabled={loading}>
         {loading ? "Enviando..." : "Recuperar Contraseña"}
+      </button>
+
+      {/* Botón para regresar a la página de inicio de sesión */}
+      <button type="button" onClick={() => navigate("/login")}>
+        Principal
       </button>
     </form>
   );

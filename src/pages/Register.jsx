@@ -4,10 +4,10 @@ import { useState } from "react";
 // Importar este hook de react-router-dom que permite navegar entre las diferentes rutas de la aplicación.
 import { useNavigate } from "react-router-dom";
 
-// Importar el hook useDispatch que permite acceder a la función dispatch de Redux, que se utiliza para enviar acciones al stoer.
+// Importar el hook useDispatch que permite acceder a la función dispatch de Redux, que se utiliza para enviar acciones al store.
 import { useDispatch } from "react-redux";
 
-// Importar llas funciones de registerSlice para el registro de usuarios
+// Importar las funciones de registerSlice para el registro de usuarios
 import {
   registerRequest,
   registerSuccess,
@@ -20,7 +20,7 @@ function Register() {
   // Hook para navegar entre rutas
   const navigate = useNavigate();
 
-  // Estado para almacenar el nombre, correo, la contraseña y la confirmación de la contraseña, datos ingresados por el usuario
+  // Estado para almacenar el nombre, correo, la contraseña y la confirmación de la contraseña
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,38 +32,37 @@ function Register() {
   // Estado para almacenar el estado de carga del formulario
   const [loading, setLoading] = useState(false);
 
+  // Estado para mostrar/ocultar contraseñas
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   // Funciones de validación
   const validateForm = () => {
     // Verificación de campos vacíos
     if (!name || !email || !password || !confirmPassword) {
-      return "Todos los campos son obligatorios.";
+      alert("Todos los campos son obligatorios.");
+      return false;
     }
     // Verificación básica de que el e-mail contenga '@' y '.com'
     if (!email.includes("@") || !email.includes(".com")) {
-      return "Por favor, ingrese un correo electrónico válido.";
+      alert("Por favor, ingrese un correo electrónico válido.");
+      return false;
     }
     // Verificación de que las contraseñas coincidan
     if (password !== confirmPassword) {
-      return "Las contraseñas no coinciden.";
+      alert("Las contraseñas no coinciden.");
+      return false;
     }
     // Sin errores
-    return null;
+    return true;
   };
 
   // Manejo del envío del formulario
-  // Asíncrona para manejar la lógica de registro de usuario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validar el formulario
-    const validationError = validateForm();
-    if (validationError) {
-      // Mostrar mensaje de error
-      setError(validationError);
-      return;
-    }
-    // Limpiar errores
-    setError("");
+    // Validación antes de enviar datos
+    if (!validateForm()) return;
     // Activar el estado de carga
     setLoading(true);
 
@@ -72,14 +71,18 @@ function Register() {
     sessionStorage.setItem("email", email);
     sessionStorage.setItem("password", password);
 
+    // Enviar acción de solicitud de registro
     dispatch(registerRequest());
 
     try {
       // Registro exitoso
       dispatch(registerSuccess({ name, email, password }));
+      // Mostrar mensaje de éxito
+      alert("¡Usuario registrado exitosamente!");
       // Redirigir al login
       navigate("/login");
     } catch (err) {
+      // Enviar acción de fallo de registro
       dispatch(registerFailure(err.message));
       // Mostrar mensaje de error
       setError(err.message);
@@ -101,42 +104,75 @@ function Register() {
         value={name}
         // Actualiza el estado 'name' con el valor ingresado por el usuario
         onChange={(e) => setName(e.target.value)}
-        required
       />
 
       <input
-        // Campo tipo 'e-mail' para mejor validación del navegador
-        type="email"
+        // Campo para el correo electrónico
+        type="text"
         placeholder="Correo electrónico"
         value={email}
-        // Actualiza el estado 'e-mail' con el valor ingresado por el usuario
+        // Actualiza el estado 'email' con el valor ingresado por el usuario
         onChange={(e) => setEmail(e.target.value)}
-        required
       />
 
-      <input
-        // Campo para la contraseña
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        // Actualiza el estado 'password' con el valor ingresado por el usuario
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+      <div style={{ position: "relative" }}>
+        {/* Contenedor relativo para el campo de contraseña */}
+        <input
+          // Cambia entre 'text' y 'password' según el estado de showPassword
+          type={showPassword ? "text" : "password"}
+          placeholder="Contraseña"
+          value={password}
+          // Actualiza el estado 'password' con el valor ingresado por el usuario
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button
+          type="button"
+          // Cambia el estado de showPassword
+          onClick={() => setShowPassword(!showPassword)}
+          style={{
+            border: "none",
+            background: "none",
+            cursor: "pointer",
+          }}
+        >
+          {/* Texto del botón cambia según el estado */}
+          {showPassword ? "Ocultar" : "Mostrar"}
+        </button>
+      </div>
 
-      <input
-        // Campo para la confirmación de la contraseña
-        type="password"
-        placeholder="Confirmar Contraseña"
-        value={confirmPassword}
-        // Actualiza el estado 'confirmPassword' con el avlor ingresado por el usuario
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        required
-      />
+      <div style={{ position: "relative" }}>
+        {/* Contenedor relativo para el campo de confirmación de contraseña */}
+        <input
+          // Cambia entre 'text' y 'password' según el estado de showConfirmPassword
+          type={showConfirmPassword ? "text" : "password"}
+          placeholder="Confirmar Contraseña"
+          value={confirmPassword}
+          // Actualiza el estado 'confirmPassword' con el valor ingresado por el usuario
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        <button
+          type="button"
+          // Cambia el estado de showConfirmPassword
+          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+          style={{
+            border: "none",
+            background: "none",
+            cursor: "pointer",
+          }}
+        >
+          {/* Texto del botón cambia según el estado */}
+          {showConfirmPassword ? "Ocultar" : "Mostrar"}
+        </button>
+      </div>
 
-      {/* Botón deshabilitado si está en carga*/}
+      {/* Botón deshabilitado si está en carga */}
       <button type="submit" disabled={loading}>
         {loading ? "Cargando..." : "Registrarse"}
+      </button>
+
+      {/* Botón para regresar a la página de inicio de sesión */}
+      <button type="button" onClick={() => navigate("/login")}>
+        Principal
       </button>
     </form>
   );
