@@ -1,5 +1,7 @@
+// Importar necesarias para la creación del componente
 import { useEffect, useState } from "react"
 
+// Importamos el componente ContainerCards
 import ContainerCards from "../components/functionals/ContainerCards"
 
 export default function ApiResults() {

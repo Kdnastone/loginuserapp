@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 // Importar el hook useDispatch para acceder a Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Importar las funciones del loginSlice para el manejo de autenticación
 import { loginRequest, loginSuccess, loginFailure } from "../redux/loginSlice";
@@ -23,6 +23,9 @@ function Login() {
 
   // Estado para almacenar mensajes de error en el formulario
   const [error, setError] = useState("");
+
+  // Obtener el estado de autenticación desde el Redux store
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
@@ -48,12 +51,15 @@ function Login() {
 
     // Verificar si los datos ingresados coinciden con los almacenados
     if (email === storedEmail && password === storedPassword) {
-      // Marcar el inicio de sesión como eixtoso
+      // Marcar el inicio de sesión como exitoso
       dispatch(loginSuccess({ email, password }));
       // Mostrar un mensaje de éxito
       alert("¡Inicio de sesión exitoso!");
-      // Redirigir al usuario a la página principal
-      navigate("/home");
+
+      // Redirigir solo si el usuario no está autenticado
+      if (!isAuthenticated) {
+        navigate("/home"); // Redirigir al usuario a la página principal
+      }
     } else {
       // Si las credenciales no coinciden, establecer el mensaje de error
       setError("Credenciales incorrectas.");
@@ -78,7 +84,6 @@ function Login() {
       />
 
       <div style={{ position: "relative" }}>
-        {" "}
         {/* Contenedor relativo para el campo de contraseña */}
         <input
           // Cambia entre 'text' y 'password'
@@ -97,15 +102,13 @@ function Login() {
             cursor: "pointer",
           }}
         >
-          {/* Teto del botón cambia según el estado */}
+          {/* Texto del botón cambia según el estado */}
           {showPassword ? "Ocultar" : "Mostrar"}
         </button>
       </div>
 
       {/* Botón para enviar el formulario */}
-      <Link to="/home">
-        <button type="button">Iniciar Sesión</button>
-      </Link>
+      <button type="submit">Iniciar Sesión</button>
 
       {/* Botón para recuperar la contraseña, utilizando Link para la navegación */}
       <Link to="/recovery">

@@ -40,17 +40,20 @@ function Register() {
   const validateForm = () => {
     // Verificación de campos vacíos
     if (!name || !email || !password || !confirmPassword) {
-      alert("Todos los campos son obligatorios.");
+      // Considera usar un estado de error en lugar de alert
+      alert("Todos los campos son obligatorios."); 
       return false;
     }
     // Verificación básica de que el e-mail contenga '@' y '.com'
     if (!email.includes("@") || !email.includes(".com")) {
-      alert("Por favor, ingrese un correo electrónico válido.");
+      // Considera usar un estado de error en lugar de alert
+      alert("Por favor, ingrese un correo electrónico válido."); 
       return false;
     }
     // Verificación de que las contraseñas coincidan
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden.");
+      // Considera usar un estado de error en lugar de alert
+      alert("Las contraseñas no coinciden."); 
       return false;
     }
     // Sin errores
@@ -63,6 +66,7 @@ function Register() {
 
     // Validación antes de enviar datos
     if (!validateForm()) return;
+    
     // Activar el estado de carga
     setLoading(true);
 
@@ -75,17 +79,21 @@ function Register() {
     dispatch(registerRequest());
 
     try {
-      // Registro exitoso
+      // Aquí debería incluirse la lógica de registro (API o similar)
+      // Simulación de registro exitoso
       dispatch(registerSuccess({ name, email, password }));
+      
       // Mostrar mensaje de éxito
-      alert("¡Usuario registrado exitosamente!");
+      // Considera usar un estado de éxito en lugar de alert
+      alert("¡Usuario registrado exitosamente!"); 
       // Redirigir al login
       navigate("/login");
     } catch (err) {
       // Enviar acción de fallo de registro
       dispatch(registerFailure(err.message));
       // Mostrar mensaje de error
-      setError(err.message);
+      // Se puede mostrar el error en el componente
+      setError(err.message); 
     } finally {
       // Desactivar el estado de carga
       setLoading(false);

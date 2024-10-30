@@ -5,6 +5,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import loginReducer from './loginSlice';
 import registerReducer from './registerSlice';
 import recoveryReducer from './recoverySlice';
+import logoutReducer from './logoutSlice';
 
 // Configuración del store de Redux
 const store = configureStore({
@@ -16,6 +17,8 @@ const store = configureStore({
     register: registerReducer, 
     // Maneja la recuperación de contraseñas
     recovery: recoveryReducer, 
+    // Agrega el logoutReducer 
+    logout: logoutReducer,     
   },
 });
 
