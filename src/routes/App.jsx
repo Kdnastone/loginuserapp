@@ -14,8 +14,9 @@ import Header from '../components/header/Header';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Recovery from '../pages/Recovery';
-import Home from '../pages/Home';
-import ApiResults from '../pages/ApiResults';
+import Home from "../pages/Home"
+import Autenticado from "../components/lyouts/Autenticado"
+import ApiResults from "../pages/ApiResults"
 
 function App() {
   return (
@@ -25,12 +26,16 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/recovery" element={<Recovery />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/results" element={<ApiResults />} />
+          <Route path="/recovery" element={<Recovery />} />          
           {/* Redirigir a /login por defecto */}
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="*" element={<div>404 Not Found</div>} />
+        </Routes>
+        <Routes>
+          <Route element={<Autenticado />}>       
+            <Route path="results" element={<ApiResults />}/>   
+            <Route path="home" element={<Home/>}/>       
+          </Route>  
         </Routes>
       </Router>
     </Provider>
