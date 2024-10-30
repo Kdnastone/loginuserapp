@@ -1,3 +1,6 @@
+
+/* Estilos globales para toda la aplicación */
+
 :root{
      --color1: #127780;
 }
@@ -11,8 +14,9 @@
 
 body{
     margin: 0;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #000000; 
 }
 header{
     background-color: var(--color1);
@@ -58,4 +62,3 @@ footer p{
     padding-top: 2em;
     font-style: italic;
 }
-
