@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client'
 import Router from './router/Router'
 import './styles/global.css'
 
+// Importar estilos
+import './styles/global.css';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router />

@@ -5,7 +5,7 @@ import Footer from '../functionals/Footer'
 
 export default function autenticado() {
   return (
-    <> 
+    <>
        <Header></Header>   
        <Outlet></Outlet>
        <Footer></Footer>

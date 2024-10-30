@@ -1,0 +1,36 @@
+.bienvenida{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    margin: 0;
+}
+.bienvenida section{
+    background-image: linear-gradient(to bottom, #4682B4, #6495ED, #87CEEB);
+    padding: 3em;
+    border-radius: 20px;
+    transition: transform 0.3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap:1em;
+}
+.bienvenida section:hover{
+    transform: scale(1.1);
+    border: solid 2px darkblue;
+    box-shadow: 0 0 10px darkblue;
+ 
+}
+.bienvenida h3{
+    font-family: "Spicy Rice", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: darkblue;
+    font-size: calc(16px + 1vw)
+}
+.bienvenida p{
+    margin: 0;
+    font-size: calc(10px + 0.5vw)
+}
