@@ -1,9 +1,31 @@
-import React from 'react'
+import { useEffect, useState } from "react"
 
-function ApiResults() {
+import ContainerCards from "../components/functionals/ContainerCards"
+
+export default function ApiResults() {
+
+    const [characters, setCharacters] = useState([])
+
+    const callApi = async(url) => {
+        try{
+            const data = await fetch(url)
+            const response = await data.json()  
+            setCharacters(response.data)         
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        callApi('https://api.disneyapi.dev/character')      
+    }, [])
+
   return (
-    <div>ApiResults</div>
+    <>
+        <main>
+         <ContainerCards characters={characters}></ContainerCards>
+        </main> 
+    </>
   )
 }
-
-export default ApiResults
