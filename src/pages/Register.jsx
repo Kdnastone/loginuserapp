@@ -14,6 +14,9 @@ import {
   registerFailure,
 } from "../redux/registerSlice";
 
+// Importar estilos
+import "../styles/global.css";
+
 function Register() {
   // Hook para acceder al dispatch de Redux
   const dispatch = useDispatch();
@@ -41,19 +44,19 @@ function Register() {
     // Verificación de campos vacíos
     if (!name || !email || !password || !confirmPassword) {
       // Considera usar un estado de error en lugar de alert
-      alert("Todos los campos son obligatorios."); 
+      alert("Todos los campos son obligatorios.");
       return false;
     }
     // Verificación básica de que el e-mail contenga '@' y '.com'
     if (!email.includes("@") || !email.includes(".com")) {
       // Considera usar un estado de error en lugar de alert
-      alert("Por favor, ingrese un correo electrónico válido."); 
+      alert("Por favor, ingrese un correo electrónico válido.");
       return false;
     }
     // Verificación de que las contraseñas coincidan
     if (password !== confirmPassword) {
       // Considera usar un estado de error en lugar de alert
-      alert("Las contraseñas no coinciden."); 
+      alert("Las contraseñas no coinciden.");
       return false;
     }
     // Sin errores
@@ -66,7 +69,7 @@ function Register() {
 
     // Validación antes de enviar datos
     if (!validateForm()) return;
-    
+
     // Activar el estado de carga
     setLoading(true);
 
@@ -82,10 +85,10 @@ function Register() {
       // Aquí debería incluirse la lógica de registro (API o similar)
       // Simulación de registro exitoso
       dispatch(registerSuccess({ name, email, password }));
-      
+
       // Mostrar mensaje de éxito
       // Considera usar un estado de éxito en lugar de alert
-      alert("¡Usuario registrado exitosamente!"); 
+      alert("¡Usuario registrado exitosamente!");
       // Redirigir al login
       navigate("/login");
     } catch (err) {
@@ -93,7 +96,7 @@ function Register() {
       dispatch(registerFailure(err.message));
       // Mostrar mensaje de error
       // Se puede mostrar el error en el componente
-      setError(err.message); 
+      setError(err.message);
     } finally {
       // Desactivar el estado de carga
       setLoading(false);
@@ -101,88 +104,90 @@ function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Mostrar mensaje de error si existe */}
-      {error && <div className="error-message">{error}</div>}
+    <main>
+      <form onSubmit={handleSubmit}>
+        {/* Mostrar mensaje de error si existe */}
+        {error && <div className="error-message">{error}</div>}
 
-      <input
-        // Campo para el nombre
-        type="text"
-        placeholder="Nombre"
-        value={name}
-        // Actualiza el estado 'name' con el valor ingresado por el usuario
-        onChange={(e) => setName(e.target.value)}
-      />
-
-      <input
-        // Campo para el correo electrónico
-        type="text"
-        placeholder="Correo electrónico"
-        value={email}
-        // Actualiza el estado 'email' con el valor ingresado por el usuario
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <div style={{ position: "relative" }}>
-        {/* Contenedor relativo para el campo de contraseña */}
         <input
-          // Cambia entre 'text' y 'password' según el estado de showPassword
-          type={showPassword ? "text" : "password"}
-          placeholder="Contraseña"
-          value={password}
-          // Actualiza el estado 'password' con el valor ingresado por el usuario
-          onChange={(e) => setPassword(e.target.value)}
+          // Campo para el nombre
+          type="text"
+          placeholder="Nombre"
+          value={name}
+          // Actualiza el estado 'name' con el valor ingresado por el usuario
+          onChange={(e) => setName(e.target.value)}
         />
-        <button
-          type="button"
-          // Cambia el estado de showPassword
-          onClick={() => setShowPassword(!showPassword)}
-          style={{
-            border: "none",
-            background: "none",
-            cursor: "pointer",
-          }}
-        >
-          {/* Texto del botón cambia según el estado */}
-          {showPassword ? "Ocultar" : "Mostrar"}
-        </button>
-      </div>
 
-      <div style={{ position: "relative" }}>
-        {/* Contenedor relativo para el campo de confirmación de contraseña */}
         <input
-          // Cambia entre 'text' y 'password' según el estado de showConfirmPassword
-          type={showConfirmPassword ? "text" : "password"}
-          placeholder="Confirmar Contraseña"
-          value={confirmPassword}
-          // Actualiza el estado 'confirmPassword' con el valor ingresado por el usuario
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          // Campo para el correo electrónico
+          type="text"
+          placeholder="Correo electrónico"
+          value={email}
+          // Actualiza el estado 'email' con el valor ingresado por el usuario
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <button
-          type="button"
-          // Cambia el estado de showConfirmPassword
-          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          style={{
-            border: "none",
-            background: "none",
-            cursor: "pointer",
-          }}
-        >
-          {/* Texto del botón cambia según el estado */}
-          {showConfirmPassword ? "Ocultar" : "Mostrar"}
+
+        <div style={{ position: "relative" }}>
+          {/* Contenedor relativo para el campo de contraseña */}
+          <input
+            // Cambia entre 'text' y 'password' según el estado de showPassword
+            type={showPassword ? "text" : "password"}
+            placeholder="Contraseña"
+            value={password}
+            // Actualiza el estado 'password' con el valor ingresado por el usuario
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            type="button"
+            // Cambia el estado de showPassword
+            onClick={() => setShowPassword(!showPassword)}
+            style={{
+              border: "none",
+              background: "none",
+              cursor: "pointer",
+            }}
+          >
+            {/* Texto del botón cambia según el estado */}
+            {showPassword ? "Ocultar" : "Mostrar"}
+          </button>
+        </div>
+
+        <div style={{ position: "relative" }}>
+          {/* Contenedor relativo para el campo de confirmación de contraseña */}
+          <input
+            // Cambia entre 'text' y 'password' según el estado de showConfirmPassword
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Confirmar Contraseña"
+            value={confirmPassword}
+            // Actualiza el estado 'confirmPassword' con el valor ingresado por el usuario
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <button
+            type="button"
+            // Cambia el estado de showConfirmPassword
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            style={{
+              border: "none",
+              background: "none",
+              cursor: "pointer",
+            }}
+          >
+            {/* Texto del botón cambia según el estado */}
+            {showConfirmPassword ? "Ocultar" : "Mostrar"}
+          </button>
+        </div>
+
+        {/* Botón deshabilitado si está en carga */}
+        <button type="submit" disabled={loading}>
+          {loading ? "Cargando..." : "Registrarse"}
         </button>
-      </div>
 
-      {/* Botón deshabilitado si está en carga */}
-      <button type="submit" disabled={loading}>
-        {loading ? "Cargando..." : "Registrarse"}
-      </button>
-
-      {/* Botón para regresar a la página de inicio de sesión */}
-      <button type="button" onClick={() => navigate("/login")}>
-        Principal
-      </button>
-    </form>
+        {/* Botón para regresar a la página de inicio de sesión */}
+        <button type="button" onClick={() => navigate("/login")}>
+          Principal
+        </button>
+      </form>
+    </main>
   );
 }
 

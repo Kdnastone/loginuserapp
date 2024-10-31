@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 // Importa el componente Header
 import Header from '../components/header/Header'; 
-
+import Autenticado from "../components/lyouts/Autenticado";
+import Footer from "../components/functionals/Footer";
 
 // Importa el store de redux
 import store from '../redux/store';
@@ -16,7 +17,6 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Recovery from '../pages/Recovery';
 import Home from "../pages/Home";
-import Autenticado from "../components/lyouts/Autenticado";
 import ApiResults from "../pages/ApiResults";
 
 function App() {
@@ -25,9 +25,9 @@ function App() {
       <Router>
         <Routes>
           {/* Rutas públicas: Header visible solo en estas rutas */}
-          <Route path="/login" element={<><Header /><Login /></>} />
-          <Route path="/register" element={<><Header /><Register /></>} />
-          <Route path="/recovery" element={<><Header /><Recovery /></>} />
+          <Route path="/login" element={<><Header /><Login /><Footer /></>} />
+          <Route path="/register" element={<><Header /><Register /><Footer /></>} />
+          <Route path="/recovery" element={<><Header /><Recovery /><Footer /></>} />
           
           {/* Redirigir a /login por defecto */}
           <Route path="/" element={<Navigate to="/login" replace />} />

@@ -26,8 +26,11 @@ export default function Header() {
           onClick={handleLogout}
           style={{
             cursor: "pointer",
-            color: "blue",
-            textDecoration: "underline",
+            marginRight: "1em",
+            fontWeight: "bold",
+            textDecoration: "none",
+            color: "#183739",
+            fontSize: "calc(14px + 0.5vw)",
             background: "none",
             border: "none",
           }}

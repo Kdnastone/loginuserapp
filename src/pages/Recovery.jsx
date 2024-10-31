@@ -14,6 +14,9 @@ import {
   recoveryFailure,
 } from "../redux/recoverySlice";
 
+// Importar estilos
+import "../styles/global.css";
+
 function Recovery() {
   // Hook para acceder a la función dispatch de Redux
   const dispatch = useDispatch();
@@ -61,6 +64,7 @@ function Recovery() {
   };
 
   return (
+    <main>
     <form onSubmit={handleSubmit}>
       {/* Mostrar mensaje de error si existe */}
       {error && <div className="error-message">{error}</div>}
@@ -83,6 +87,7 @@ function Recovery() {
         Principal
       </button>
     </form>
+  </main>
   );
 }
 

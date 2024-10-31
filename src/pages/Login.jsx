@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 // Importar las funciones del loginSlice para el manejo de autenticación
 import { loginRequest, loginSuccess, loginFailure } from "../redux/loginSlice";
 
+// Importar estilos
+import "../styles/global.css";
+
 function Login() {
   // Hook para acceder al dispatch de Redux
   const dispatch = useDispatch();
@@ -69,6 +72,7 @@ function Login() {
   };
 
   return (
+    <main>
     <form onSubmit={handleSubmit}>
       {/* Mostrar mensaje de error si existe */}
       {error && <div className="error-message">{error}</div>}
@@ -94,12 +98,17 @@ function Login() {
         />
         <button
           type="button"
-          // Cambia el estado de showPassword
           onClick={() => setShowPassword(!showPassword)}
           style={{
+            position: "relative",
+            right: "10px",
+            top: "50%",
+            transform: "translateY(-50%)",
             border: "none",
             background: "none",
             cursor: "pointer",
+            color: "#007bff",
+            fontSize: "14px",
           }}
         >
           {/* Texto del botón cambia según el estado */}
@@ -120,6 +129,7 @@ function Login() {
         <button type="button">Registrar Usuario</button>
       </Link>
     </form>
+    </main>
   );
 }
 
